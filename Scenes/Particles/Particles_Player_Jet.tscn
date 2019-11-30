@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Particles/Particles2D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Particles/Player_Jet.tres" type="Material" id=2]
+[ext_resource path="res://Sprites/Entities/Particle_Player_Jet.png" type="Texture" id=3]
+
+[node name="Particles_Player_Jet" instance=ExtResource( 1 )]
+rotation = 2.0944
+emitting = false
+amount = 31
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = ExtResource( 2 )
+texture = ExtResource( 3 )
+
+[node name="lifetime" parent="." index="0"]
+wait_time = 0.5
