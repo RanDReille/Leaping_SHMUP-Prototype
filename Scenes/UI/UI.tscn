@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Theme/JP_Support.tres" type="Theme" id=1]
+[ext_resource path="res://Scenes/UI/Scripts/UI.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/UI/UI_Power_Empty.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/UI/UI_Power_Full.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/UI/Lifebar_Full.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/UI/Boss_HP_Empty.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/UI/Boss_HP_Full.png" type="Texture" id=7]
+
+
+
+[node name="UI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Power" type="TextureProgress" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = -32.0
+margin_right = 24.0
+margin_bottom = -16.0
+max_value = 3.0
+texture_under = ExtResource( 3 )
+texture_progress = ExtResource( 4 )
+
+[node name="Life" type="TextureProgress" parent="."]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 100.0
+margin_bottom = 16.0
+max_value = 5.0
+value = 3.0
+texture_progress = ExtResource( 5 )
+
+[node name="Boss_HP" type="TextureProgress" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -256.0
+margin_top = 16.0
+margin_right = 256.0
+margin_bottom = 40.0
+texture_under = ExtResource( 6 )
+texture_progress = ExtResource( 7 )
+
+[node name="Label" type="Label" parent="Boss_HP"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_top = -14.0
+margin_right = 20.0
+grow_horizontal = 2
+text = "Name"
+align = 1
+valign = 1
