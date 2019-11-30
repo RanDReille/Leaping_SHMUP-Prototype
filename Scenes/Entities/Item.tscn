@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Entities/Entity.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Entities/Scripts/Item.gd" type="Script" id=2]
+
+[node name="Item" groups=[
+"Item",
+] instance=ExtResource( 1 )]
+z_index = -1
+script = ExtResource( 2 )
+[connection signal="area_entered" from="." to="." method="_on_Item_area_entered"]

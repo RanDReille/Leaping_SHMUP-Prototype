@@ -1,0 +1,94 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scenes/Entities/Boss.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Entities/Scripts/Enemy_Boss_Nekocharlotte.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Entities/Enemy_Boss_Nekocharlotte_Head.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Entities/Nekocharlotte_Player_Corpse.png" type="Texture" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 128.0
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 64.0
+
+[sub_resource type="Animation" id=3]
+resource_name = "Eat"
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 1 ],
+"method": "sub_AI_change"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Bite_Area/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[node name="Enemy_Boss_Nekocharlotte" index="0" instance=ExtResource( 1 )]
+z_index = -1
+script = ExtResource( 2 )
+HP = 150.0
+boss_name = "Nekocharlotte"
+
+[node name="sprite" parent="." index="0"]
+texture = ExtResource( 3 )
+hframes = 2
+
+[node name="Corpse" type="Sprite" parent="sprite" index="0"]
+visible = false
+position = Vector2( -96, 80 )
+texture = ExtResource( 4 )
+
+[node name="Gun" type="Position2D" parent="sprite" index="1"]
+position = Vector2( -80, -24 )
+
+[node name="collision" parent="." index="1"]
+shape = SubResource( 1 )
+
+[node name="Bite_Area" type="Area2D" parent="." index="2"]
+position = Vector2( -56, 40 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bite_Area" index="0"]
+shape = SubResource( 2 )
+disabled = true
+
+[node name="Attack_Anim" type="AnimationPlayer" parent="." index="3"]
+anims/Eat = SubResource( 3 )
+
+[node name="AI0_Timer" type="Timer" parent="." index="4"]
+wait_time = 8.0
+one_shot = true
+
+[node name="Corpse_Timer" type="Timer" parent="." index="5"]
+one_shot = true
+[connection signal="area_entered" from="Bite_Area" to="." method="_on_Bite_Area_area_entered"]
+[connection signal="timeout" from="AI0_Timer" to="." method="_on_AI0_Timer_timeout"]
+[connection signal="timeout" from="Corpse_Timer" to="." method="_on_Corpse_Timer_timeout"]
