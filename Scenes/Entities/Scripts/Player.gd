@@ -71,7 +71,8 @@ func _on_Player_area_entered(area):
 		#HP -= area.dmg
 		if invincible_time <= 0:
 			if GLOBAL_SCRIPTS.player_power > 1:
-				GLOBAL_SCRIPTS.drop("Power", global_position)
+				var item_power = GLOBAL_SCRIPTS.drop("Power", global_position)
+				item_power.to_collect = 0.5
 				GLOBAL_SCRIPTS.player_power -= 2
 			else:
 				dead()

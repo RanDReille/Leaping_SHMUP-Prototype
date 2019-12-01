@@ -4,6 +4,7 @@ const GRAVITY = 200
 const ATTRACTION = 4000000
 
 var remaining_bounce = 2
+var to_collect = 0
 
 func _ready():
 	velocity.y = -200
@@ -11,6 +12,10 @@ func _ready():
 
 func _physics_process(delta):
 	velocity.y += delta * GRAVITY
+	
+	if to_collect > 0:
+		print(str(to_collect))
+		to_collect -= delta
 	
 	if global_position.y >= 576:
 		if remaining_bounce > 0:
@@ -25,7 +30,7 @@ func _physics_process(delta):
 	
 	#print(to_player)
 	
-	if GLOBAL_SCRIPTS.length(to_player) < 200:
+	if GLOBAL_SCRIPTS.length(to_player) < 200 && to_collect <= 0:
 		var acceleration = ATTRACTION * to_player/(pow(GLOBAL_SCRIPTS.length(to_player),3))
 		#print(str(GLOBAL_SCRIPTS.length(acceleration)))
 		velocity += delta * acceleration
@@ -39,6 +44,6 @@ func collect_benefit():
 
 func _on_Item_area_entered(area):
 	#print(area)
-	if area.is_in_group("Player"):
+	if area.is_in_group("Player") && to_collect <= 0:
 		collect_benefit()
 		destroy()
