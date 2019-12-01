@@ -47,5 +47,5 @@ velocity = Vector2( 0, -600 )
 
 [node name="player_respawn_control" type="AnimationPlayer" parent="."]
 anims/Respawn = SubResource( 1 )
-[connection signal="life_change" from="Player" to="ui_layer/UI" method="_on_Player_life_change"]
 [connection signal="life_change" from="Player" to="." method="_on_Player_life_change"]
+[connection signal="life_change" from="Player" to="ui_layer/UI" method="_on_Player_life_change"]
