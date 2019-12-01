@@ -69,3 +69,7 @@ ui_arrow={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[rendering]
+
+environment/default_clear_color=Color( 0.0627451, 0.0627451, 0.25098, 1 )
